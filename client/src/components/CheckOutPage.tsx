@@ -45,7 +45,7 @@ export default function CheckoutPage() {
       setIsApplying(true);
       setMessage('');
 
-      const response = await fetch('http://localhost:5000/promo/validate', {
+      const response = await fetch('https://travelbookingapp-backend.onrender.com/promo/validate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -83,7 +83,7 @@ export default function CheckoutPage() {
       return;
     }
     try {
-      await fetch('http://localhost:5000/checkout', {
+      await fetch('https://travelbookingapp-backend.onrender.com/promo/validate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -109,7 +109,7 @@ export default function CheckoutPage() {
   return (
     <div className="min-h-screen bg-[#f6f7fb]">
       <div className="max-w-6xl mx-auto px-6 py-10 flex flex-col lg:flex-row gap-10">
-        {/* Left Section */}
+       
         <div className="bg-white rounded-lg shadow p-7 flex-1 min-w-[340px]">
           <div className="flex items-center gap-3 mb-6">
             <button
@@ -203,7 +203,7 @@ export default function CheckoutPage() {
           </form>
         </div>
 
-        {/* Right Section - Summary */}
+      
         <div className="bg-white rounded-lg shadow-md p-8 w-full max-w-[375px] self-start">
           <div className="grid grid-cols-2 gap-y-1 gap-x-4 text-sm text-gray-700 mb-4">
             <span className="font-medium">Experience</span>

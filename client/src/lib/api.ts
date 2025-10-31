@@ -1,4 +1,4 @@
-const Base_API_Url = 'http://localhost:5000'
+const Base_API_Url = 'https://travelbookingapp-backend.onrender.com'
 
 export const fetchExperiences = async () =>{
     const response = await fetch(`${Base_API_Url}/experiences`)
