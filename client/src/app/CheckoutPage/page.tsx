@@ -27,7 +27,6 @@ export default function CheckoutPage() {
   const taxes = 59;
   const subtotal = price * qty;
 
-
   const discountedAmount =
     discountType === 'percent' ? (subtotal * discount) / 100 : discountType === 'flat' ? discount : 0;
 
@@ -36,7 +35,6 @@ export default function CheckoutPage() {
   const incrementQty = () => setQty(q => q + 1);
   const decrementQty = () => setQty(q => (q > 1 ? q - 1 : 1));
 
- 
   const handleApplyPromo = async () => {
     if (!promo.trim()) {
       setMessage('Please enter a promo code.');
@@ -62,9 +60,7 @@ export default function CheckoutPage() {
         setDiscountType(data.type || 'percent');
         setMessage(
           `Promo applied! ${
-            data.type === 'flat'
-              ? `₹${data.discount} off`
-              : `${data.discount}% discount`
+            data.type === 'flat' ? `₹${data.discount} off` : `${data.discount}% discount`
           }`
         );
       } else {
@@ -86,23 +82,28 @@ export default function CheckoutPage() {
       alert('Please agree to the terms and safety policy.');
       return;
     }
-     await fetch('http://localhost:5000/checkout', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: fullName,
-        email,
-        title,
-        date,
-        time,
-        qty,
-        subtotal,
-        taxes,
-        discount,
-        total,
-      }),
-    });
-    router.push('/ResultPage');
+    try {
+      await fetch('http://localhost:5000/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: fullName,
+          email,
+          title,
+          date,
+          time,
+          qty,
+          subtotal,
+          taxes,
+          discount,
+          total,
+        }),
+      });
+      router.push('/ResultPage');
+    } catch (error) {
+      console.error('Checkout failed:', error);
+      alert('Checkout failed. Please try again.');
+    }
   };
 
   return (
@@ -202,6 +203,7 @@ export default function CheckoutPage() {
           </form>
         </div>
 
+        {/* Right Section - Summary */}
         <div className="bg-white rounded-lg shadow-md p-8 w-full max-w-[375px] self-start">
           <div className="grid grid-cols-2 gap-y-1 gap-x-4 text-sm text-gray-700 mb-4">
             <span className="font-medium">Experience</span>
@@ -238,9 +240,7 @@ export default function CheckoutPage() {
             <div className="flex justify-between text-sm text-green-600 mb-1">
               <span>
                 Discount{' '}
-                {discountType === 'percent'
-                  ? `(${discount}%)`
-                  : `(₹${discount})`}
+                {discountType === 'percent' ? `(${discount}%)` : `(₹${discount})`}
               </span>
               <span>-₹{discountedAmount.toFixed(0)}</span>
             </div>
