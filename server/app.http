@@ -1,0 +1,31 @@
+### Get all experiences
+GET http://localhost:5000/experiences
+Content-Type: application/json
+
+
+### Get details for a specific experience by ID
+GET http://localhost:5000/experiences/69032ff3da23b4a9a08ddfad
+Content-Type: application/json
+
+
+### Create a new booking
+POST http://localhost:5000/bookings
+Content-Type: application/json
+
+{
+  "experienceId": "69023f68146669a6aa3a3358",
+  "slotId": "6902c357c39d1323e0c6cac3",
+  "name": "Prasannakumar",
+  "email": "Prasanna@gmail.com",
+  "promoCode": "SAVE10"
+}
+
+###
+
+POST http://localhost:5000/promo/validate
+Content-Type: application/json
+
+{
+  "code": "SAVE10",
+  "experienceId": "69023f68146669a6aa3a335b"
+}
