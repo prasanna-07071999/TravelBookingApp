@@ -2,7 +2,7 @@
 import { useState, useMemo } from "react";
 import ExperienceCard from '../components/ExperienceCard';
 import useFetchExperiences from '../hooks/useFetchExperiences';
-import Header from "@/components/Header";
+
 
 const HomePage = () => {
   const { experiences, isLoading, error } = useFetchExperiences();
